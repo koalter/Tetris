@@ -81,16 +81,21 @@ function Pieza(tetromino, color)
     /* Métodos de control */
     Pieza.prototype.rotar = function()
     {
-        this.desDibujar();
-        this.tetrominoN = (this.tetrominoN + 1) % this.tetromino.length;
-        /**
-         * 0 = (0 + 1) % 4 = 1;
-         * 1 = (1 + 1) % 4 = 2;
-         * 2 = (2 + 1) % 4 = 3;
-         * 3 = (3 + 1) % 4 = 0;
-         */
-        this.activeTetromino = this.tetromino[this.tetrominoN];
-        this.dibujar();
+        let tetrominoN = (this.tetrominoN + 1) % this.tetromino.length;
+        let siguiente = this.tetromino[tetrominoN];
+        if (this.colision(0, 0, siguiente) == false) 
+        {
+            this.desDibujar();
+            this.tetrominoN = tetrominoN;
+            /**
+             * 0 = (0 + 1) % 4 = 1;
+             * 1 = (1 + 1) % 4 = 2;
+             * 2 = (2 + 1) % 4 = 3;
+             * 3 = (3 + 1) % 4 = 0;
+             */
+            this.activeTetromino = siguiente;
+            this.dibujar();
+        }
     }
     Pieza.prototype.moverAbajo = function()
     {
